@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=1]
+
+[node name="SShape_AC" type="Node2D" groups=[
+"Shapes",
+]]
+modulate = Color( 0.882353, 0.890196, 0.627451, 1 )
+
+[node name="Block1" parent="." instance=ExtResource( 1 )]
+position = Vector2( -20, -20 )
+
+[node name="Block2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 20, -20 )
+
+[node name="Block3" parent="." instance=ExtResource( 1 )]
+position = Vector2( -20, 20 )
+
+[node name="Block4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 20, 20 )
