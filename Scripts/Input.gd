@@ -1,10 +1,11 @@
 extends Node2D
-	
+
 signal MoveLeft
 signal MoveRight
 signal RotateLeft
 signal RotateRight
 signal Drop
+signal DropStopped
 signal Store
 signal Retrieve
 
@@ -16,15 +17,23 @@ func _ready():
 	
 	
 func _process(_delta):
+	if Input.is_action_pressed("ui_down"):	
+		emit_signal("Drop")
+		_input_ready = false
+	else:
+		emit_signal("DropStopped")
+	
 	if !_input_ready:
 		return
 	
 	if Input.is_action_pressed("ui_left"):	
 		emit_signal("MoveLeft")
 		_input_ready = false
+		
 	if Input.is_action_pressed("ui_right"):	
 		emit_signal("MoveRight")
 		_input_ready = false
+
 
 func _on_InputTimer_timeout():
 	_input_ready = true

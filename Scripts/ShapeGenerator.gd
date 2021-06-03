@@ -10,12 +10,15 @@ onready var NextShape
 onready var _shapes = []
 onready var _shape_queue = []
 
+var _default_drop_time
+
 func _ready():
 	randomize()
 
 	load_shapes(ShapePath)
 	generate_queue()
 	
+	_default_drop_time = $DropTimer.wait_time
 	$DropTimer.start()
 
 
@@ -58,3 +61,11 @@ func new_shape():
 	_shape_queue.push_back(get_next_shape_instance())
 	_shape_queue.pop_front()
 	set_shapes()	
+
+
+func set_DropTimer(wait_time):
+	$DropTimer.wait_time = wait_time
+
+
+func reset_DropTimer():
+	$DropTimer.wait_time = _default_drop_time

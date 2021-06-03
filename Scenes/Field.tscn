@@ -45,5 +45,7 @@ shape = SubResource( 2 )
 [node name="Input" parent="." instance=ExtResource( 3 )]
 
 [connection signal="shape_drop" from="ShapeGenerator" to="." method="_on_ShapeGenerator_shape_drop"]
+[connection signal="Drop" from="Input" to="." method="_on_Input_Drop"]
+[connection signal="DropStopped" from="Input" to="." method="_on_Input_DropStopped"]
 [connection signal="MoveLeft" from="Input" to="." method="_on_Input_MoveLeft"]
 [connection signal="MoveRight" from="Input" to="." method="_on_Input_MoveRight"]

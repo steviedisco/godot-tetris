@@ -3,6 +3,7 @@ extends Node2D
 var BLOCK_SIZE = 10
 var COLS = 10
 var ROWS = 20
+var DROP_SPEED = 0.1
 
 var _screen_size
 var _field_blocks = []
@@ -30,6 +31,7 @@ func _on_ShapeGenerator_shape_drop():
 	if !try_move(0.0, 4 * BLOCK_SIZE):
 		place_shape()
 		new_shape()
+		$ShapeGenerator.reset_DropTimer()
 
 
 func new_shape():
@@ -68,6 +70,14 @@ func _on_Input_MoveRight():
 	try_move(4 * BLOCK_SIZE, 0.0)
 
 
+func _on_Input_Drop():
+	$ShapeGenerator.set_DropTimer(DROP_SPEED)
+
+
+func _on_Input_DropStopped():
+	$ShapeGenerator.reset_DropTimer()
+
+
 func try_move(x, y) -> bool:
 	
 	var prev_pos = Vector2($CurrentShape.position)
@@ -82,3 +92,6 @@ func try_move(x, y) -> bool:
 			break
 			
 	return !collide
+
+
+
