@@ -10,13 +10,13 @@ modulate = Color( 0.803922, 0.356863, 0.356863, 1 )
 script = ExtResource( 2 )
 
 [node name="Block1" parent="." instance=ExtResource( 1 )]
-position = Vector2( -60, 0 )
+position = Vector2( -60, -20 )
 
 [node name="Block2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -20, 0 )
+position = Vector2( -20, -20 )
 
 [node name="Block3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 20, 0 )
+position = Vector2( 20, -20 )
 
 [node name="Block4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 60, 0 )
+position = Vector2( 60, -20 )

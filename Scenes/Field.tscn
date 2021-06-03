@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/ShapeGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Field.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Input.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 400 )
@@ -41,4 +42,8 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource( 2 )
 
+[node name="Input" parent="." instance=ExtResource( 3 )]
+
 [connection signal="shape_drop" from="ShapeGenerator" to="." method="_on_ShapeGenerator_shape_drop"]
+[connection signal="MoveLeft" from="Input" to="." method="_on_Input_MoveLeft"]
+[connection signal="MoveRight" from="Input" to="." method="_on_Input_MoveRight"]
