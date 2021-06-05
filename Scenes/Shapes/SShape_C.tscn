@@ -8,13 +8,12 @@
 modulate = Color( 0.196078, 0.721569, 0.513726, 1 )
 
 [node name="Block1" parent="." instance=ExtResource( 1 )]
-position = Vector2( -60, 20 )
+position = Vector2( -40, 40 )
 
 [node name="Block2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -20, -20 )
 
 [node name="Block3" parent="." instance=ExtResource( 1 )]
-position = Vector2( -20, 20 )
+position = Vector2( 0, 40 )
 
 [node name="Block4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 20, -20 )
+position = Vector2( 40, 0 )

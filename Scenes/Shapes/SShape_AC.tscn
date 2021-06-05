@@ -2,19 +2,18 @@
 
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=1]
 
-[node name="Square" type="Node2D" groups=[
+[node name="SShape_AC" type="Node2D" groups=[
 "Shapes",
 ]]
 modulate = Color( 0.890196, 0.603922, 0.298039, 1 )
 
 [node name="Block1" parent="." instance=ExtResource( 1 )]
-position = Vector2( -20, -20 )
+position = Vector2( -40, 0 )
 
 [node name="Block2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 20, -20 )
 
 [node name="Block3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 20, 20 )
+position = Vector2( 0, 40 )
 
 [node name="Block4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 60, 20 )
+position = Vector2( 40, 40 )

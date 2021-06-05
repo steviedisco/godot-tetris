@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Square.gd" type="Script" id=2]
 
-[node name="SShape_AC" type="Node2D" groups=[
+[node name="Square" type="Node2D" groups=[
 "Shapes",
 ]]
 modulate = Color( 0.882353, 0.890196, 0.627451, 1 )
+script = ExtResource( 2 )
 
 [node name="Block1" parent="." instance=ExtResource( 1 )]
 position = Vector2( -20, -20 )

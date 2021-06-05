@@ -9,6 +9,7 @@ var _screen_size
 var _field_blocks = []
 
 var _current_shape
+var _current_shape_dir = 1
 
 func _ready():
 	_screen_size = get_viewport_rect().size
@@ -38,16 +39,24 @@ func new_shape():
 	$ShapeGenerator.new_shape()
 	
 	clear_children($CurrentShape)
+	
 	_current_shape = $ShapeGenerator.CurrentShape.duplicate()
+	_current_shape_dir = 1
+	
 	$CurrentShape.add_child(_current_shape)
 
 	$CurrentShape.position.x = 20 * BLOCK_SIZE
 	$CurrentShape.position.y = 4 * BLOCK_SIZE
+	$CurrentShape.rotation = 0
+	
+	for block in _current_shape.get_children():
+		block.rotation = 0
 
 
 func place_shape():
-	var placed = _current_shape.duplicate(true)
+	var placed = _current_shape.duplicate()
 	placed.position = Vector2($CurrentShape.position)
+	placed.rotation = _current_shape.rotation
 	clear_children(placed)
 	
 	for block in _current_shape.get_children():
@@ -59,6 +68,7 @@ func place_shape():
 		placed.add_child(dupe)
 
 	$PlacedShapes.add_child(placed)
+	
 	clear_children($CurrentShape)
 
 
@@ -94,4 +104,55 @@ func try_move(x, y) -> bool:
 	return !collide
 
 
+func try_rotate(dir: int) -> bool:
+	
+	var prev_rot = _current_shape.rotation
+	var collide = false
+	
+	_current_shape.rotation += dir * PI/2
+	
+	for block in _current_shape.get_children():
+		if block.test_move(block.get_global_transform(), Vector2.ZERO):
+			collide = true
+			_current_shape.rotation = prev_rot
+			break
+	
+	if !collide:
+		for block in _current_shape.get_children():
+			block.rotation -= dir * PI/2
+			
+		if _current_shape_dir == 0:
+			_current_shape_dir = _current_shape.Directions
+			
+		if _current_shape_dir == _current_shape.Directions: 
+			_current_shape_dir = 0
+	
+	return !collide
 
+
+func _on_Input_RotateLeft():
+	if _current_shape.Directions == 4:
+		var dir = 4 - _current_shape_dir
+		if dir > 0:
+			_current_shape_dir -= 1
+			try_rotate(-1)
+		else:
+			_current_shape_dir += 1
+			try_rotate(1)
+	else:
+		try_rotate(-1)
+	
+
+func _on_Input_RotateRight():
+	if _current_shape.Directions != 4:
+		var dir = _current_shape.Directions - _current_shape_dir
+		if dir > 0:
+			_current_shape_dir += 1
+			try_rotate(1)
+		else:
+			_current_shape_dir -= 1
+			try_rotate(-1)
+	else:
+		try_rotate(1)
+		
+	

@@ -45,7 +45,7 @@ func generate_queue():
 
 
 func get_next_shape_instance(): 
-	return _shapes[randi() % _shapes.size()].instance()
+	return _shapes[0].instance() # _shapes[randi() % _shapes.size()].instance()
 
 
 func set_shapes():
