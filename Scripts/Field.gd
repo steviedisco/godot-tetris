@@ -6,20 +6,13 @@ var ROWS = 20
 var DROP_SPEED = 0.1
 
 var _screen_size
-var _field_blocks = []
 
 var _current_shape
 var _current_shape_dir = 1
 
 func _ready():
 	_screen_size = get_viewport_rect().size
-	
-	for _i in range(ROWS):
-		var col = []
-		for _j in range(COLS):
-			col.append(0)
-		_field_blocks.append(col)
-	
+
 	new_shape()
 
 
@@ -69,6 +62,7 @@ func place_shape():
 		placed.add_child(dupe)
 
 	$PlacedShapes.add_child(placed)
+	$Monitor.CheckLines()
 	
 	clear_children($CurrentShape)
 
