@@ -121,38 +121,33 @@ func try_rotate(dir: int) -> bool:
 		for block in _current_shape.get_children():
 			block.rotation -= dir * PI/2
 			
-		if _current_shape_dir == 0:
-			_current_shape_dir = _current_shape.Directions
-			
-		if _current_shape_dir == _current_shape.Directions: 
-			_current_shape_dir = 0
+		_current_shape_dir += dir
+
+		if _current_shape_dir < 1:
+			_current_shape_dir = 4
+		elif _current_shape_dir > 4:
+			_current_shape_dir = 1
 	
 	return !collide
 
 
 func _on_Input_RotateLeft():
-	if _current_shape.Directions == 4:
-		var dir = 4 - _current_shape_dir
+	if _current_shape.Directions != 4:
+		var dir = _current_shape.Directions - _current_shape_dir
 		if dir > 0:
-			_current_shape_dir -= 1
 			try_rotate(-1)
 		else:
-			_current_shape_dir += 1
 			try_rotate(1)
 	else:
 		try_rotate(-1)
-	
+
 
 func _on_Input_RotateRight():
 	if _current_shape.Directions != 4:
 		var dir = _current_shape.Directions - _current_shape_dir
 		if dir > 0:
-			_current_shape_dir += 1
 			try_rotate(1)
 		else:
-			_current_shape_dir -= 1
 			try_rotate(-1)
 	else:
 		try_rotate(1)
-		
-	
