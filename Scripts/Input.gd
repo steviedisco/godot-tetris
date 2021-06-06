@@ -6,24 +6,20 @@ signal RotateLeft
 signal RotateRight
 signal Drop
 signal DropStopped
-signal Store
-signal Retrieve
 
 var _input_move_ready = true
-var _input_rotate_ready = true
 var _dropping = false
 
+
 func _ready():
-	$MoveTimer.start()
-	$RotateTimer.start()
-	pass
-	
+	reset_Timers()
+		
 	
 func _process(_delta):
-	if Input.is_action_pressed("ui_down"):	
+	if !_dropping and Input.is_action_pressed("ui_down"):	
 		_dropping = true
 		emit_signal("Drop")
-	elif _dropping:
+	elif _dropping and !Input.is_action_pressed("ui_down"):
 		_dropping = false
 		emit_signal("DropStopped")
 	
@@ -36,19 +32,22 @@ func _process(_delta):
 			emit_signal("MoveRight")
 			_input_move_ready = false
 	
-	if _input_rotate_ready:
 		if Input.is_action_pressed("ui_rotate_left"):	
 			emit_signal("RotateLeft")
-			_input_rotate_ready = false
+			_input_move_ready = false
 			
 		if Input.is_action_pressed("ui_rotate_right"):	
 			emit_signal("RotateRight")
-			_input_rotate_ready = false
+			_input_move_ready = false
 
 
-func _on_MoveTimer_timeout():
+func _on_InputTimer_timeout():
 	_input_move_ready = true
 
 
-func _on_RotateTimer_timeout():
-	_input_rotate_ready = true
+func stop_drop():
+	emit_signal("DropStopped")
+
+
+func reset_Timers():
+	$InputTimer.start()

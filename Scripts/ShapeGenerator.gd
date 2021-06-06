@@ -45,8 +45,8 @@ func generate_queue():
 
 
 func get_next_shape_instance(): 
-	return _shapes[6].instance() # _shapes[randi() % _shapes.size()].instance()
-
+	return  _shapes[randi() % _shapes.size()].instance() # _shapes[6].instance() 
+	
 
 func set_shapes():
 	CurrentShape = _shape_queue[0]
@@ -58,6 +58,7 @@ func _on_DropTimer_timeout():
 	
 
 func new_shape():
+	reset_DropTimer()
 	_shape_queue.push_back(get_next_shape_instance())
 	_shape_queue.pop_front()
 	set_shapes()	
@@ -69,3 +70,7 @@ func set_DropTimer(wait_time):
 
 func reset_DropTimer():
 	$DropTimer.wait_time = _default_drop_time
+
+
+func start_DropTimer():
+	$DropTimer.start()

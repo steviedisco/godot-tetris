@@ -32,17 +32,18 @@ func _on_ShapeGenerator_shape_drop():
 	if !try_move(0.0, 4 * BLOCK_SIZE):
 		place_shape()
 		new_shape()
-		$ShapeGenerator.reset_DropTimer()
 
 
 func new_shape():
 	$ShapeGenerator.new_shape()
+	$Input.stop_drop()
+	$Input.reset_Timers()
 	
 	clear_children($CurrentShape)
 	
 	_current_shape = $ShapeGenerator.CurrentShape.duplicate()
 	_current_shape_dir = 1
-	
+
 	$CurrentShape.add_child(_current_shape)
 
 	$CurrentShape.position.x = 20 * BLOCK_SIZE
@@ -55,7 +56,7 @@ func new_shape():
 
 func place_shape():
 	var placed = _current_shape.duplicate()
-	placed.position = Vector2($CurrentShape.position)
+	placed.position = Vector2($CurrentShape.position + _current_shape.position)
 	placed.rotation = _current_shape.rotation
 	clear_children(placed)
 	
@@ -82,6 +83,7 @@ func _on_Input_MoveRight():
 
 func _on_Input_Drop():
 	$ShapeGenerator.set_DropTimer(DROP_SPEED)
+	$ShapeGenerator.start_DropTimer()
 
 
 func _on_Input_DropStopped():

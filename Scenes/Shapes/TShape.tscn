@@ -7,6 +7,7 @@
 "Shapes",
 ]]
 modulate = Color( 0.729412, 0.419608, 0.572549, 1 )
+position = Vector2( -20, -20 )
 script = ExtResource( 2 )
 
 [node name="Block1" parent="." instance=ExtResource( 1 )]
