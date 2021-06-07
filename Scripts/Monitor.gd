@@ -6,18 +6,18 @@ func _ready():
 	_screen_size = get_viewport_rect().size
 
 
-func _draw():
-	draw_line(position, cast_to, Color(255, 0, 0), 1)
+#func _draw():
+#	draw_line(Vector2.ZERO, cast_to, Color(255, 0, 0), 1)
 
 
 func CheckLines():
 
-	for row_index in range (19, 18, -1):
+	for row_index in range (19, 0, -1):
 		
 		clear_exceptions()
 		
 		position.y = (row_index * 40) + 20
-		cast_to = Vector2(_screen_size.x - 20, position.y)
+		cast_to = Vector2(_screen_size.x - 40, 0)
 
 		var collision_count = 0
 		var colliders = []
